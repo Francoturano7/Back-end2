@@ -29,16 +29,15 @@ class ProductManager{
     };
 
     getProducts = async()=>{
-        let respuesta2=await this.readProducts()
-        return console.log(respuesta2)
+        return await this.readProducts()
     }
 
     getProductsById= async(id)=>{
         let respuesta3=await this.readProducts();
         if(!respuesta3.find((product)=>product.id===id)){
-            console.log('Product Not Found')
+            return 'Product Not Found'
         }else{
-            console.log(respuesta3.find((product)=>product.id===id))
+        return   respuesta3.find((product)=>product.id===id)
         }
     }
 
@@ -57,27 +56,11 @@ class ProductManager{
     }
 }
 
-const products =new ProductManager
 
-products.addProduct('title1','description1',1000,'img1','abc1',10);
-products.addProduct('title2','description2',2000,'img2','abc2',20);
-products.addProduct('title3','description3',3000,'img3','abc3',30);
 
-//products.getProducts()
 
-//products.getProductsById(3)
+ module.exports=ProductManager;
 
-//products.deleteProductsById(3)
-
-// products.updateProducts({
-//     title:'title3',
-//     description:'description3',
-//     price:6000,
-//     thumbnail:'img3',
-//     code:'abc3',
-//     stock:30,
-//     id:3
-// })
 
 
 
