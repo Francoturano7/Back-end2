@@ -3,7 +3,8 @@ const path= require(`path`)
 const ProductManager = require('./ProductManager.js')
 const app=express()
 
-
+app.use(express.json())
+app.use(express.urlencoded({extended:true}))
 
 
 
@@ -13,13 +14,13 @@ app.listen(8080,()=>{
 let products = new ProductManager()
 
 app.get(`/products`,async(req,res)=>{
-    let fileProducts=products.readProducts()
+    let fileProducts=products.getProducts()
     res.send(await fileProducts )
     
 })
 
 app.get(`/products/:id`,async(req,res)=>{
-    let id= parseInt (req.params.id)
+    let id= parseInt(req.params.id)
     try {
         const productFound=await products.getProductsById(id)
         if(!productFound){
