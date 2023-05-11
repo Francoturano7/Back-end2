@@ -2,20 +2,21 @@ const express=require(`express`)
 const path= require(`path`)
 const ProductManager = require('./ProductManager.js')
 const app=express()
+const PORT=8080
+
 
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 
 
-
-app.listen(8080,()=>{
+app.listen(PORT,()=>{
     console.log(`escuchando puerto 8080`)
 })
 let products = new ProductManager()
 
 app.get(`/products`,async(req,res)=>{
     let fileProducts=products.getProducts()
-    res.send(await fileProducts )
+    res.json(await fileProducts )
     
 })
 
@@ -26,7 +27,7 @@ app.get(`/products/:id`,async(req,res)=>{
         if(!productFound){
             res.send(`Product not Found`)
         }else{
-            res.send(productFound )
+            res.json(productFound )
             
         }
     } catch (error) {
