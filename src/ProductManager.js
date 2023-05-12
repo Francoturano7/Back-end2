@@ -37,7 +37,7 @@ class ProductManager {
             let respuesta = await fs.promises.readFile(this.path, `utf-8`);
             return JSON.parse(respuesta);
         } catch (error) {
-            if (error.code === "ENOENT") { // En caso de que el archivo este vacio entra al catch  y retorna un array vacio
+            if (error.code === "ENOENT") {
                 return []
             } else {
                 throw err;

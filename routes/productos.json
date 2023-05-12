@@ -1,0 +1,35 @@
+[
+    {
+        "title": "producto1",
+        "description": "descrption1",
+        "code": "code1",
+        "price": 10,
+        "status": true,
+        "stock": 10,
+        "category": "category1",
+        "thumbnail": "./img/img1",
+        "id": "23f802ee-9d90-45e0-a353-6a3e66c5aba5"
+    },
+    {
+        "title": "producto2",
+        "description": "descrption2",
+        "code": "code2",
+        "price": 20,
+        "status": true,
+        "stock": 20,
+        "category": "category2",
+        "thumbnail": "./img/img2",
+        "id": "e1687fba-891b-47c2-8da2-bb50ff1184af"
+    },
+    {
+        "title": "producto3",
+        "description": "descrption3",
+        "code": "code3",
+        "price": 30,
+        "status": true,
+        "stock": 30,
+        "category": "category3",
+        "thumbnail": "./img/img3",
+        "id": "9dd984c3-f075-4ceb-9a4d-5d0e791853e0"
+    }
+]
