@@ -1,35 +1,57 @@
 [
-    {
-        "title": "producto1",
-        "description": "descrption1",
-        "code": "code1",
-        "price": 10,
-        "status": true,
-        "stock": 10,
-        "category": "category1",
-        "thumbnail": "./img/img1",
-        "id": "23f802ee-9d90-45e0-a353-6a3e66c5aba5"
-    },
-    {
-        "title": "producto2",
-        "description": "descrption2",
-        "code": "code2",
-        "price": 20,
-        "status": true,
-        "stock": 20,
-        "category": "category2",
-        "thumbnail": "./img/img2",
-        "id": "e1687fba-891b-47c2-8da2-bb50ff1184af"
-    },
-    {
-        "title": "producto3",
-        "description": "descrption3",
-        "code": "code3",
-        "price": 30,
-        "status": true,
-        "stock": 30,
-        "category": "category3",
-        "thumbnail": "./img/img3",
-        "id": "9dd984c3-f075-4ceb-9a4d-5d0e791853e0"
-    }
+  {
+    "title": "producto1",
+    "description": "descrption1",
+    "code": "code1",
+    "price": 10,
+    "status": true,
+    "stock": 10,
+    "category": "category1",
+    "thumbnail": "./img/img1",
+    "id": "576a42a7-2a44-4dd9-8676-89a125408e11"
+  },
+  {
+    "title": "producto2",
+    "description": "descrption2",
+    "code": "code2",
+    "price": 20,
+    "status": true,
+    "stock": 20,
+    "category": "category2",
+    "thumbnail": "./img/img2",
+    "id": "c025b252-4309-449a-8f7d-1f06747b4ae2"
+  },
+  {
+    "title": "producto3",
+    "description": "descrption3",
+    "code": "code3",
+    "price": 30,
+    "status": true,
+    "stock": 30,
+    "category": "category3",
+    "thumbnail": "./img/img3",
+    "id": "057426b8-d229-4abf-b8ea-c2eebbc735ad"
+  },
+  {
+    "title": "producto4",
+    "description": "descrption4",
+    "code": "code4",
+    "price": 40,
+    "status": true,
+    "stock": 40,
+    "category": "category4",
+    "thumbnail": "./img/img4",
+    "id": "f58bc2ab-4f53-40ad-8234-500c94fe1c9d"
+  },
+  {
+    "title": "producto5",
+    "description": "descrption5",
+    "code": "code5",
+    "price": 50,
+    "status": true,
+    "stock": 50,
+    "category": "category5",
+    "thumbnail": "./img/img5",
+    "id": "6585e18c-3714-42a4-8c81-03a45d31686f"
+  }
 ]

@@ -1,57 +1,34 @@
 const express = require(`express`)
 const { Router } = express
 const router = new Router()
-const uuid4 = require(`uuid4`)
+const ProductManager = require('../src/ProductManager')
+
+let product = new ProductManager()
 
 
-let products = require(`./productos.json`)
-
-//let products=[]
-
-router.get(`/`, (req, res) => {
-    res.json({ data: products, message: `Todos los productos enviados` })
+router.get(`/`,async  (req, res) => {
+    res.send(await product.getProducts())
 })
 
-router.get(`/:pid`, (req, res) => {
-    let id = req.params.pid
-    const productFound = products.filter((elem) => {
-        return elem.id === id
-    })
-    res.send(productFound)
+router.get(`/:pid`, async (req, res) => {
+    let id = req.params.pid  
+    res.send(await product.getProductsById(id))
 })
 
-router.post(`/`, (req, res) => {
-    let id = uuid4()
-    let pr = req.body
-    pr.id = id
-    products.push(pr)
-    res.send({ data: pr, message: `producto guardado con exito` })
+router.post(`/`,async (req, res) => {
+    let newProduct = req.body
+    res.send(await product.addProduct(newProduct))
 })
 
-router.put(`/:pid`, (req, res) => {
+router.put(`/:pid`,async (req, res) => {
     let id = req.params.pid
     let infoNew = req.body
-
-    let arrayUpdated = products.map((elem) => {
-        if (elem.id == id) {
-            return { ...infoNew, id }
-        } else {
-            return elem
-        }
+    res.send(await product.updateProducts(id,infoNew))
     })
-    console.log(arrayUpdated)
-    products = arrayUpdated
-    res.send({ data: products, message: `Producto actualizado con exito` })
-})
 
-router.delete(`/:pid`, (req, res) => {
+router.delete(`/:pid`, async (req, res) => {
     let id = req.params.pid
-    const arrayNew = products.filter((elem) => {
-        return elem.id !== id
-    })
-    console.log(arrayNew)
-    products = arrayNew
-    res.send({ data: products, message: `Producto eliminado correctamente` })
+    res.send(await product.deleteProductsById(id))
 })
 
 module.exports = router
