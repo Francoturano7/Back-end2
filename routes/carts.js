@@ -1,44 +1,35 @@
 const express = require(`express`)
 const { Router } = express
 const router = new Router()
-const uuid4 = require(`uuid4`)
+const CartManager = require(`../src/CartManager.js`)
 
-// let products = require(`./productos.json`)
-
-let carts= require(`./carrito.json`)
+let cart= new CartManager()
 
 
-router.get(`/`, (req, res) => {
-    res.send(carts)
+router.get(`/`, async (req, res) => {
+    res.send(await cart.getCarts() )
 })
 
-router.post(`/`, (req, res) => {
-    let id = uuid4()
-    let products=[{producto1:`prodcto1`,producto2:`producto2`}]
-    carts.push(id,products)
-    res.send({ id, products })
+router.post(`/`, async (req, res) => {
+    res.send(await cart.addCart())
 })
 
-router.get(`/:cid`, (req, res) => {
-    let cid = carts.cid
-    const productFound = products.filter((elem) => {
-        return elem.id === cid
+
+
+
+
+router.get(`/:cid`,async (req, res) => {
+    let id = req.params.cid
+    res.send(await cart.getCartsById(id))
+})
+
+router.post(`/:cid/products/:pid`,async (req, res) => {
+    let cartId=req.params.cid
+    let productId=req.params.pid
+    res.send(await cart.addProductInCart(cartId,productId))
     })
-    res.send(productFound)
-})
 
-router.post(`/:cid/product/:pid`, (req, res) => {
-    let idCarrito = req.params.cid
-    const carritoFound = carts.filter((elem) => {
-        return elem.id === idCarrito
-    })
-    let idProducto=req.params.pid
-    const productFound=carritoFound.filter((elem) => {
-        return elem.id === idProducto
-    })
-    carts.push(productFound)
-    res.send(productFound)
 
-})
+
 
 module.exports = router

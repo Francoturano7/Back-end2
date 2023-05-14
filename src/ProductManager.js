@@ -49,9 +49,10 @@ class ProductManager {
     getProductsById = async (id) => {
         let respuesta3 = await this.getProducts();
         if (!respuesta3.find((product) => product.id === id)) {
-            console.log('Product Not Found')
+            return'Product Not Found'
         } else {
-            return respuesta3.find((product) => product.id === id)
+          let productFound=  respuesta3.find((product) => product.id === id)
+            return productFound
         }
     }
 
