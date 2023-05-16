@@ -50,25 +50,31 @@ class CartManager {
     addProductInCart = async (cartId, productId) => {
         let cartById = await this.getCartsById(cartId)
         let productById = await allProducts.getProductsById(productId)
-
         let allCarts = await this.getCarts()
-        let cartFilter = await allCarts.filter(cart => cart.id != cartId)
-
-        if (cartById.products.some(prod => prod.id === productId)) {
-            let moreProductInCart = cartById.products.find(prod => prod.id === productId)
-            moreProductInCart.cantidad ++
-            let cartsConcat = [moreProductInCart, ...cartFilter]
-            await this.addCart(cartsConcat)
-            return `producto sumado al carrito`
+        await allCarts.filter(cart => cart.id != cartId)
+        if (cartById !== 'Cart Not Found') {
+            if (productById !== "Product Not Found") {
+                let productIndex = cartById.products.findIndex(prod => prod.id == productId)
+                if (productIndex !== -1) {
+                    cartById.products[productIndex].quantity++
+                    let cartIndex = allCarts.findIndex(cart => cart.id == cartId)
+                    allCarts[cartIndex] = cartById
+                    await fs.promises.writeFile(this.path, JSON.stringify(allCarts, null, 2));
+                    return cartById;
+                } else {
+                    cartById.products.push({ id: productId, quantity: 1 })
+                    let cartIndex = allCarts.findIndex(cart => cart.id == cartId)
+                    allCarts[cartIndex] = cartById
+                    await fs.promises.writeFile(this.path, JSON.stringify(allCarts, null, 2));
+                    return cartById;
+                }
+            } else {
+                return "Ese producto no existe"
+            }
         }
-
-        cartById.products.push({ id: productById.id, cantidad: 1 })
-
-        let cartsConcat = [cartById, ...cartFilter]
-        console.log(cartsConcat)
-     return cartsConcat
-        
-       
+        else {
+            return "no existe ese carrito"
+        }
     }
 }
 

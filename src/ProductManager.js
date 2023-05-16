@@ -16,20 +16,16 @@ class ProductManager {
             if (!product.title || !product.description || !product.price || !product.thumbnail || !product.code || !product.stock || !product.status || !product.category) {
                 return "Error: Todos los campos son obligatorios.";
             }
-
             if (products.some(p => p.code === product.code)) {
                 return "Error: El código debe ser único.";
-        
             }
-
-            const newProduct = { ...product, id:uuid4() };
+            const newProduct = { ...product, id: uuid4() };
             products.push(newProduct);
             await fs.promises.writeFile(this.path, JSON.stringify(products, null, 2));
             return `Producto agregado con id: ${newProduct.id}`;
         } catch (error) {
             console.log(error)
         }
-
     }
 
     getProducts = async () => {
@@ -43,15 +39,14 @@ class ProductManager {
                 throw err;
             }
         }
-
     };
 
     getProductsById = async (id) => {
         let respuesta3 = await this.getProducts();
         if (!respuesta3.find((product) => product.id === id)) {
-            return'Product Not Found'
+            return 'Product Not Found'
         } else {
-          let productFound=  respuesta3.find((product) => product.id === id)
+            let productFound = respuesta3.find((product) => product.id === id)
             return productFound
         }
     }
@@ -63,7 +58,7 @@ class ProductManager {
         return `Producto Eliminado con el id: ${id}`
     }
 
-    updateProducts = async ( id, {...product} ) => {
+    updateProducts = async (id, { ...product }) => {
         await this.deleteProductsById(id);
         let productOld = await this.getProducts();
         let productsModif = [{ ...product, id }, ...productOld];
