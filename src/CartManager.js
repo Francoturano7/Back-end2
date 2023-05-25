@@ -1,12 +1,12 @@
 const fs = require(`fs`);
 const uuid4 = require("uuid4");
-const ProductManager = require('./ProductManager')
+const  ProductManager= require ("./ProductManager");
 
-let allProducts = new ProductManager()
+let allProducts = new ProductManager(`./db/productos.json`)
 
-class CartManager {
+ class CartManager {
     constructor() {
-        this.path = "./routes/carrito.json";
+        this.path = "./db/carrito.json";
         this.cart = []
     }
 
@@ -80,8 +80,6 @@ class CartManager {
 
 
 
+module.exports=CartManager
 
 
-
-
-module.exports = CartManager;

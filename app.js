@@ -1,61 +1,57 @@
 //Create Server
-const express = require(`express`)
+const express =require(`express`)
 const app = express()
-const path = require(`path`)
+const path =require ("path")
 
-//Http import
-const http= require(`http`)
+const http= require(`http`) 
 const server= http.createServer(app)
 
-//Views Engine
-const handlebars=require(`express-handlebars`)
+const handlebars =require (`express-handlebars`)
 
-//Import Routes
-const homeRouter=require(`./routes/home.router`)
-const routesApiProducts = require(`./routes/products`)
-const routesApiCarts = require(`./routes/carts`)
+const homeRouter=require(`./routes/home.views.js`)
+const indexRouter= require (`./routes/index.router.js`)
+const  realTimeRouter= require ("./routes/realTimeProducts.views")
+const ProductManager = require ("./src/ProductManager")
 
-//Socket import
-const {Server}=require(`socket.io`)
+
+const {Server}= require(`socket.io`)
 const io=new Server(server)
 
+const productManager = new ProductManager(`./db/productos.json`)
 
 const PORT = 8080 || process.env.PORT
 
-//Public
-app.use(express.static(__dirname+`/public`))
-
-//Views
-app.engine(`handlebars`,handlebars.engine())
-app.set(`view engine`, `handlebars`)
-app.set(`views`, __dirname+`/views`)
-
-
+server.listen(PORT, () => {
+console.log(`escuchando puerto 8080`)
+})
 
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-//Routes
-app.use(`/home`,homeRouter)
-app.use(`/api/products`, routesApiProducts)
-app.use(`/api/carts`, routesApiCarts)
+app.engine(`handlebars`,handlebars.engine())
+app.set(`views`, __dirname+`/views`)
+app.set(`view engine`, `handlebars`)
 
-let messages=[]
+app.use(express.static(__dirname+`/public`))
+
+app.use(`/api`,indexRouter)
+
+app.use(`/`, homeRouter)
+app.use(`/realtimeproducts`, realTimeRouter)
+
 
 //Socket
-io.on(`connection`,(socket)=>{
+io.on(`connection`,async(socket)=>{
     console.log(`New User Conected`)
-    socket.emit(`wellcome`,`Hola Cliente Bienvenido`)
+   
 
-    socket.on(`new-message`,(data)=>{
-        console.log(data)
-        messages.push(data)
-        io.sockets.emit(`messages-all`,messages)
+    socket.on(`addProduct`,async (data)=>{
+       const added=await productManager.addProduct(data)
+        io.sockets.emit(`allProducts`,await productManager.getProducts())
     })
 })
 
-
-server.listen(PORT, () => {
-    console.log(`escuchando puerto 8080`)
+app.get(`*`,(req,res)=>{
+    res.status(404).json({status:`error`, msg: `Path not found`})
 })
