@@ -1,10 +1,10 @@
 const fs = require(`fs`);
 const uuid4 = require("uuid4");
-const  ProductManager= require ("./ProductManager");
+const ProductManager = require("./ProductManager");
 
 let allProducts = new ProductManager(`./db/productos.json`)
 
- class CartManager {
+class CartManager {
     constructor() {
         this.path = "./db/carrito.json";
         this.cart = []
@@ -80,6 +80,6 @@ let allProducts = new ProductManager(`./db/productos.json`)
 
 
 
-module.exports=CartManager
+module.exports = CartManager
 
 

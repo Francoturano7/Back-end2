@@ -12,7 +12,7 @@ const tableProducts = document.getElementById('listaProd')
 
 socket.on('allProducts', async (data) => {
 
- const html=  await data?.map( ( prod )=> {
+    const html = await data?.map((prod) => {
         return (
             ` <tr>
 
@@ -25,13 +25,13 @@ socket.on('allProducts', async (data) => {
                 <td><img src=${prod.thumbnail} alt="" width="30px" /> </td>
             </tr>
             `
-           
-        )
-       
-    
-});
 
-  tableProducts.innerHTML= html
+        )
+
+
+    });
+
+    tableProducts.innerHTML = html
 
 })
 

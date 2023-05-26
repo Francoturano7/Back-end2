@@ -1,7 +1,7 @@
 const fs = require(`fs`);
 const uuid4 = require("uuid4");
 
- class ProductManager {
+class ProductManager {
     constructor() {
         this.path = "./db/productos.json";
         this.products = [];
@@ -69,4 +69,4 @@ const uuid4 = require("uuid4");
     }
 }
 
-module.exports=ProductManager
+module.exports = ProductManager

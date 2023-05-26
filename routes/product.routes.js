@@ -1,6 +1,6 @@
-const Router =require ("express");
-const ProductManager =require ('../src/ProductManager');
- const productRouter = Router()
+const Router = require("express");
+const ProductManager = require('../src/ProductManager');
+const productRouter = Router()
 
 const productManager = new ProductManager(`../db/productos.json`)
 
@@ -30,4 +30,4 @@ productRouter.delete(`/:pid`, async (req, res) => {
     res.send(await productManager.deleteProductsById(id))
 })
 
-module.exports=productRouter
+module.exports = productRouter
