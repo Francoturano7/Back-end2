@@ -13,16 +13,21 @@ const indexRouter = require(`./routes/index.router.js`)
 const realTimeRouter = require("./routes/realTimeProducts.views")
 const ProductManager = require("./src/ProductManager")
 
+const ManagerMongo = require("./dao/mongoDao/db.js")
+const routerUser = require("./routes/user.router.js")
+
 
 const { Server } = require(`socket.io`)
 const io = new Server(server)
 
 const productManager = new ProductManager(`./db/productos.json`)
+const dataBaseConnect= new ManagerMongo('mongodb+srv://francoturano777:ecommerce1234@ecommerce.2tukzgj.mongodb.net/ecommerce')
 
 const PORT = 8080 || process.env.PORT
 
 server.listen(PORT, () => {
     console.log(`escuchando puerto 8080`)
+    dataBaseConnect.connectionMongoDb()
 })
 
 
@@ -39,6 +44,8 @@ app.use(`/api`, indexRouter)
 
 app.use(`/`, homeRouter)
 app.use(`/realtimeproducts`, realTimeRouter)
+
+app.use(`/users`, routerUser)
 
 
 //Socket
