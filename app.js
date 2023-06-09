@@ -16,6 +16,7 @@ const ProductManager = require("./src/ProductManager")
  //const ManagerMongoUser = require("./dao/mongoDao/user.db.js")
 const ManagerMongoProduct = require("./dao/mongoDao/product.db.js")
 const ManagerMongoMessage = require("./dao/mongoDao/message.db.js")
+const ManagerMongoCart=require("./dao/mongoDao/cart.db.js")
 
 //const routerUser = require("./routes/user.router.js")
 const routerProduct= require("./routes/product.router.js")
@@ -28,8 +29,9 @@ const io = new Server(server)
 
 const productManager = new ProductManager(`./db/productos.json`)
  //const dataBaseConnectUser= new ManagerMongoUser('mongodb+srv://francoturano777:ecommerce123@ecommerce.2tukzgj.mongodb.net/ecommerce')
-const dataBaseConnectProduct= new ManagerMongoProduct('mongodb+srv://coder:123456co@clustercodermongo.arye4ja.mongodb.net/codermongodb')
-const dataBaseConnectMessage= new ManagerMongoMessage('mongodb+srv://coder:123456co@clustercodermongo.arye4ja.mongodb.net/codermongodb')
+const dataBaseConnectProduct= new ManagerMongoProduct('mongodb+srv://coder:123456co@clustercodermongo.arye4ja.mongodb.net/ecommerce')
+const dataBaseConnectMessage= new ManagerMongoMessage('mongodb+srv://coder:123456co@clustercodermongo.arye4ja.mongodb.net/ecommerce')
+const dataBaseConnectCart= new ManagerMongoCart('mongodb+srv://coder:123456co@clustercodermongo.arye4ja.mongodb.net/ecommerce')
 
 
 const PORT = 8080 || process.env.PORT
@@ -39,6 +41,7 @@ server.listen(PORT, () => {
     //dataBaseConnectUser.connectionMongoDbUser()
     dataBaseConnectProduct.connectionMongoDbProduct()
     dataBaseConnectMessage.connectionMongoDbMessage()
+    dataBaseConnectCart.connectionMongoDbCart()
     
 })
 
