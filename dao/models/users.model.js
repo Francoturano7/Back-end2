@@ -1,20 +1,20 @@
-const mongoose=require(`mongoose`)
+// const mongoose=require(`mongoose`)
 
-const UserSchema = new mongoose.Schema({
-    name:{
-        type:String,
-        required:true
-    },
-    lastName:{
-        type:String,
-        required:true
-    },
-    age:{
-        typre:Number,
-        required:true
-    }
-})
+// const UserSchema = new mongoose.Schema({
+//     name:{
+//         type:String,
+//         required:true
+//     },
+//     lastName:{
+//         type:String,
+//         required:true
+//     },
+//     age:{
+//         type:Number,
+//         required:true
+//     }
+// })
 
-const User= mongoose.model(`User`,UserSchema)
+// const User= mongoose.model(`User`,UserSchema)
 
-module.exports=User
+// module.exports=User

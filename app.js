@@ -13,23 +13,34 @@ const indexRouter = require(`./routes/index.router.js`)
 const realTimeRouter = require("./routes/realTimeProducts.views")
 const ProductManager = require("./src/ProductManager")
 
-const ManagerMongo = require("./dao/mongoDao/db.js")
-const routerUser = require("./routes/user.router.js")
+ //const ManagerMongoUser = require("./dao/mongoDao/user.db.js")
+const ManagerMongoProduct = require("./dao/mongoDao/product.db.js")
+const ManagerMongoMessage = require("./dao/mongoDao/message.db.js")
+
+//const routerUser = require("./routes/user.router.js")
+const routerProduct= require("./routes/product.router.js")
+const routerMessage=require('./routes/message.router.js')
+const routerCart=require('./routes/cart.router.js')
 
 
 const { Server } = require(`socket.io`)
 const io = new Server(server)
 
 const productManager = new ProductManager(`./db/productos.json`)
-const dataBaseConnect= new ManagerMongo('mongodb+srv://francoturano777:ecommerce1234@ecommerce.2tukzgj.mongodb.net/ecommerce')
+ //const dataBaseConnectUser= new ManagerMongoUser('mongodb+srv://francoturano777:ecommerce123@ecommerce.2tukzgj.mongodb.net/ecommerce')
+const dataBaseConnectProduct= new ManagerMongoProduct('mongodb+srv://coder:123456co@clustercodermongo.arye4ja.mongodb.net/codermongodb')
+const dataBaseConnectMessage= new ManagerMongoMessage('mongodb+srv://coder:123456co@clustercodermongo.arye4ja.mongodb.net/codermongodb')
+
 
 const PORT = 8080 || process.env.PORT
 
 server.listen(PORT, () => {
     console.log(`escuchando puerto 8080`)
-    dataBaseConnect.connectionMongoDb()
+    //dataBaseConnectUser.connectionMongoDbUser()
+    dataBaseConnectProduct.connectionMongoDbProduct()
+    dataBaseConnectMessage.connectionMongoDbMessage()
+    
 })
-
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
@@ -45,7 +56,10 @@ app.use(`/api`, indexRouter)
 app.use(`/`, homeRouter)
 app.use(`/realtimeproducts`, realTimeRouter)
 
-app.use(`/users`, routerUser)
+//app.use(`/users`, routerUser)
+app.use(`/products`,routerProduct)
+app.use(`/carts`, routerCart )
+app.use(`/messages`,routerMessage)
 
 
 //Socket

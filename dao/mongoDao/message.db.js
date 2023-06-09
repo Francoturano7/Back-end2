@@ -1,18 +1,16 @@
-const mongoose = require(`mongoose`)
+const mongoose=require(`mongoose`)
 
-class ManagerMongo {
+class ManagerMongoMessage {
     constructor(url) {
         this.url = url
     }
-
-
-    connectionMongoDb() {
+    connectionMongoDbMessage() {
         return mongoose.connect(this.url, { useUnifiedTopology: true, useNewUrlParser: true })
         .then(connect=>{
-        console.log(`Conexion a DB  exitosa`)
+        console.log(`Conexion a DB message exitosa`)
          } ).catch(err=> console.log(err))
-}
+    }
 }
 
 
-module.exports = ManagerMongo
+module.exports = ManagerMongoMessage

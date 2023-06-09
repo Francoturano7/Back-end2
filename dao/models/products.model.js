@@ -7,7 +7,7 @@ const ProductSchema = new mongoose.Schema({
         required:true
     },
     price:{
-        typre:Number,
+        type:Number,
         required:true
     },
     category:{
@@ -18,11 +18,8 @@ const ProductSchema = new mongoose.Schema({
     stock:{
         type:Number,
         default:10
-    },
-    status:{
-        type:Boolean,
-        default:true
     }
 })
 
 const Product= mongoose.model(`Product`,ProductSchema)
+module.exports = Product
