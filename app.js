@@ -23,6 +23,7 @@ const routerProduct= require("./routes/product.router.js")
 const routerMessage=require('./routes/message.router.js')
 const routerCart=require('./routes/cart.router.js')
 
+const routerChat = require("./routes/chat.router.js")
 
 const { Server } = require(`socket.io`)
 const io = new Server(server)
@@ -58,6 +59,7 @@ app.use(`/api`, indexRouter)
 
 app.use(`/`, homeRouter)
 app.use(`/realtimeproducts`, realTimeRouter)
+app.use(`/chat`,routerChat)
 
 //app.use(`/users`, routerUser)
 app.use(`/products`,routerProduct)
@@ -75,6 +77,24 @@ io.on(`connection`, async (socket) => {
         io.sockets.emit(`allProducts`, await productManager.getProducts())
     })
 })
+
+let messages = []
+
+
+
+//socket  
+io.on(`connection`,(socket)=>{
+    console.log(`New user conectado`)
+    socket.emit(`wellcome`,`Hola cliente bienvenido`)
+
+    socket.on(`new-message`,(data)=>{
+         console.log(data)
+         messages.push(data)
+         io.sockets.emit(`messages-all`,messages)
+    })
+})
+
+
 
 app.get(`*`, (req, res) => {
     res.status(404).json({ status: `error`, msg: `Path not found` })

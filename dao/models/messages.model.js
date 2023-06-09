@@ -1,15 +1,11 @@
 const mongoose=require(`mongoose`)
 
 const MessageSchema = new mongoose.Schema({
-    name:{
+    user:{
                 type:String,
                 required:true
             },
-            lastName:{
-                type:String,
-                required:true
-            },
-            msg:{
+            message:{
                 type:String,
                 required:true
             }

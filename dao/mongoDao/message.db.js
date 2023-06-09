@@ -7,7 +7,7 @@ class ManagerMongoMessage {
     connectionMongoDbMessage() {
         return mongoose.connect(this.url, { useUnifiedTopology: true, useNewUrlParser: true })
         .then(connect=>{
-        console.log(`Conexion a DB message exitosa`)
+        console.log(`Conexion a DB Message exitosa`)
          } ).catch(err=> console.log(err))
     }
 }
