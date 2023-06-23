@@ -6,13 +6,13 @@ const code = document.getElementById('code');
 const price = document.getElementById('price');
 const stock = document.getElementById('stock');
 const category = document.getElementById('category');
-const thumbnail = document.getElementById('thumbnail');
+const thumbnails = document.getElementById('thumbnails');
 const tableProducts = document.getElementById('listaProd')
 
 
 socket.on('allProducts', async (data) => {
 
-    const html = await data?.map((prod) => {
+ const html=  await data?.map( ( prod )=> {
         return (
             ` <tr>
 
@@ -22,16 +22,16 @@ socket.on('allProducts', async (data) => {
                 <td>${prod.stock}</td>
                 <td>${prod.category}</td>
                 <td>${prod.code}</td>
-                <td><img src=${prod.thumbnail} alt="" width="30px" /> </td>
+                <td><img src=${prod.thumbnails} alt="" width="100px" /> </td>
             </tr>
             `
-
+           
         )
+       
+    
+});
 
-
-    });
-
-    tableProducts.innerHTML = html
+  tableProducts.innerHTML= html
 
 })
 
@@ -48,43 +48,9 @@ formProduct.addEventListener('submit', e => {
         price: price.value,
         stock: stock.value,
         category: category.value,
-        thumbnail: thumbnail.value
+        thumbnails: thumbnails.value
     })
     formProduct.reset();
     alert('El producto ha sido agregado correctamente');
 
 })
-
-
-socket.on(`wellcome`,(data)=>{
-    console.log(data)
-})
-
-socket.on(`messages-all`,(data)=>{
-    render(data)
-})
-
-function render(data){
-    const html= data.map(elem=>{
-        return(`
-        <div>
-        <strong> -${elem.author}</strong> dice: <em> ${elem.text}</em>
-        </div>
-           `)
-    }).join(` `)
-
-    document.getElementById(`caja`).innerHTML=html
-}
-
-
-
-function addmessage(){
-    const mensaje={
-       author: document.getElementById(`username`).value,
-       text: document.getElementById(`texto`).value
-    }
-
-    socket.emit(`new-message`, mensaje)
-    console.log(mensaje)
-    return false
-}

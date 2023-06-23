@@ -1,7 +1,7 @@
 const express=require(`express`)
 const {Router}=express
 
-const Message = require("../dao/models/messages.model")
+const Message = require("../../dao/models/messages.models")
 
 const routerMessage= new Router()
 
